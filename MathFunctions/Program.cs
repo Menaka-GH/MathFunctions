@@ -11,7 +11,7 @@ namespace MathFunctions
         {
             Console.WriteLine("Hello World!");
             List<double> studentMarks = new List<double>() { 80, 88, 65, 69, 74, 92, 46, 99, 49 };
-            List<int> n = new List<int>();
+            IEnumerable<int> n ;
             double standarddeviation = StandardDeviation(studentMarks);
             Console.WriteLine("The Standard deviation: " + standarddeviation);
             char userinput = 'y';
@@ -43,8 +43,14 @@ namespace MathFunctions
                             break;
 
                         case 2:
-                            Console.WriteLine("Prime Numbers");
-                            Console.WriteLine(PrimeNumbers());
+                            
+                            n = PrimeNumbers();
+                            Console.WriteLine("Prime Numbers are: ");
+                            foreach (var pn in n)
+                            {
+                                Console.WriteLine(pn);
+                            }
+                            //Console.Write(n);
                             break;
 
                         case 3:
@@ -111,21 +117,36 @@ namespace MathFunctions
 
         static List<int> PrimeNumbers()
         {
-            Console.WriteLine("Please enter a list of numbers to find the prime numbers");
-           List<int> primeNumbers = new List<int>();
+             List<int> primeNumbers = new List<int>();
+            //bool IsPrime = true;
+            Console.WriteLine("Please enter a first number to find the prime numbers");
+
             int firstNumber =int.Parse( Console.ReadLine());
+            Console.WriteLine("Please enter a last number to find the prime numbers");
             int lastNumber = int.Parse(Console.ReadLine());
             for(int i=firstNumber; i<=lastNumber;i++)
             {
-                for(int j=2; j< i/2; j++)
+                int counter = 0;
+                for (int j = 2; j <= i / 2; j++)
                 {
+                    if (i % j == 0)
+                    {
+                        counter++;
+                        break;
+                    }
+                    //else 
+                }
+                if(counter == 0 && i!=1)
+                    {
+                    {
+                       // Console.Write(i);
+                        primeNumbers.Add(i);
+                    }
 
                 }
             }
-
-
-
-            return;
+            
+           return primeNumbers;
         }
 
         static double StandardDeviation(List<double> sMarks)

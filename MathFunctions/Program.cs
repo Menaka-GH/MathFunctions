@@ -11,7 +11,7 @@ namespace MathFunctions
         {
             Console.WriteLine("Hello World!");
             List<double> studentMarks = new List<double>() { 80, 88, 65, 69, 74, 92, 46, 99, 49 };
-            IEnumerable<int> n ;
+            IEnumerable<int> primeNumbers ;
             double standarddeviation = StandardDeviation(studentMarks);
             Console.WriteLine("The Standard deviation: " + standarddeviation);
             char userinput = 'y';
@@ -44,17 +44,19 @@ namespace MathFunctions
 
                         case 2:
                             
-                            n = PrimeNumbers();
+                            primeNumbers = PrimeNumbers();
                             Console.WriteLine("Prime Numbers are: ");
-                            foreach (var pn in n)
+                            foreach (var pn in primeNumbers)
                             {
-                                Console.WriteLine(pn);
+                                Console.Write(pn + " ");
                             }
-                            //Console.Write(n);
+                            Console.WriteLine();
                             break;
 
                         case 3:
                             Console.WriteLine("Odd or Even Number");
+                            OddEven();
+
                             break;
                         case 4:
                             Console.WriteLine("Fibonacci Series");
@@ -113,6 +115,22 @@ namespace MathFunctions
 
             }
         }
+        }
+
+        static void OddEven()
+        {
+            Console.Write("Please enter a number to find Odd or Even number: ");
+            int number = int.Parse(Console.ReadLine());
+            if(number % 2 == 0)
+            {
+                Console.WriteLine($"The number {number} is even.");
+
+            }
+            else
+            {
+                Console.WriteLine($"The number {number} is odd.");
+            }
+              
         }
 
         static List<int> PrimeNumbers()

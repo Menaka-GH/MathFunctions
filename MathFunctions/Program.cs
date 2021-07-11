@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace MathFunctions
@@ -9,11 +11,29 @@ namespace MathFunctions
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
-            List<double> studentMarks = new List<double>() { 80, 88, 65, 69, 74, 92, 46, 99, 49 };
+            //reading invoice data file
+            string currentDirectory = Directory.GetCurrentDirectory();
+            DirectoryInfo directory = new DirectoryInfo(currentDirectory);
+            var fileName = Path.Combine(directory.FullName, "invoice_data.json");
+            //var fileContents = ReadInvoiceResults(fileName);
+            var invoices = DeserializeInvoices(fileName);
+            Console.WriteLine("Electricity Usage");
+            Console.WriteLine("*****************");
+            foreach (var invoice in invoices)
+            {
+                Console.WriteLine(invoice.Cost);
+            }
+            
+
+
+
+
+
+                //Standard Deviationn calculation
+                List<double> studentMarks = new List<double>() { 80, 88, 65, 69, 74, 92, 46, 99, 49 };
             IEnumerable<int> primeNumbers ;
             double standarddeviation = StandardDeviation(studentMarks);
-            Console.WriteLine("The Standard deviation: " + standarddeviation);
+          //  Console.WriteLine("The Standard deviation: " + standarddeviation);
             char userinput = 'y';
             while (userinput == 'y')
             {
@@ -39,7 +59,7 @@ namespace MathFunctions
 
                         case 1:
                             Console.WriteLine("Standard Deviation of a Students Marks:");
-                            Console.WriteLine(StandardDeviation(studentMarks));
+                            Console.WriteLine(StandardDeviationInvoice(invoices));
                             break;
 
                         case 2:
@@ -176,6 +196,46 @@ namespace MathFunctions
             return sd;
             
         }
-        
+        public static double StandardDeviationInvoice(List<Invoice> invoices)
+        {
+            double mean, sum=0, sd;
+           var totalInvoice = 0;
+            foreach (var invoice in invoices)
+            {
+                // Console.WriteLine(invoice.Usage);
+                totalInvoice = totalInvoice + invoice.Usage;
+            }
+
+            // mean = sMarks.Average();
+            // sum = sMarks.Sum(d => Math.Pow(d - mean, 2));
+            //sd = Math.Sqrt((sum) / (sMarks.Count() - 1));
+            //mean = invoices.Average();
+
+            mean = totalInvoice / invoices.Count();
+            foreach (var invoice in invoices)
+            {
+              
+                sum = sum + (invoice.Usage - mean);  
+                
+            }
+            sd = Math.Sqrt((sum) / (invoices.Count() - 1));
+
+            return sd;
+
+        }
+        public static List<Invoice> DeserializeInvoices(string fileName)
+        {
+
+            var invoices = new List<Invoice>();
+            var serializer = new JsonSerializer();
+            using (var reader = new StreamReader(fileName))
+            using (var jsonReader = new JsonTextReader(reader))
+            {
+                invoices = serializer.Deserialize<List<Invoice>>(jsonReader);
+            }
+            return invoices;
+        }
+
+
     }
 }

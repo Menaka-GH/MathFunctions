@@ -1,0 +1,87 @@
+﻿[
+	{
+		"Account No": "100",
+		"Month": "06-01-20",
+		"Usage": 540,
+		"Cost": 51.3
+	},
+	{
+		"Account No": "100",
+		"Month": "07-01-20",
+		"Usage": 530,
+		"Cost": 50.35
+	},
+	{
+		"Account No": "100",
+		"Month": "08-01-20",
+		"Usage": 565,
+		"Cost": 53.674999999999997
+	},
+	{
+		"Account No": "100",
+		"Month": "09-01-20",
+		"Usage": 537,
+		"Cost": 51.015000000000001
+	},
+	{
+		"Account No": "100",
+		"Month": "10-01-20",
+		"Usage": 564,
+		"Cost": 53.58
+	},
+	{
+		"Account No": "100",
+		"Month": "11-01-20",
+		"Usage": 512,
+		"Cost": 48.64
+	},
+	{
+		"Account No": "100",
+		"Month": "12-01-20",
+		"Usage": 528,
+		"Cost": 50.160000000000004
+	},
+	{
+		"Account No": "100",
+		"Month": "01-01-21",
+		"Usage": 450,
+		"Cost": 42.75
+	},
+	{
+		"Account No": "100",
+		"Month": "02-01-21",
+		"Usage": 490,
+		"Cost": 46.55
+	},
+	{
+		"Account No": "100",
+		"Month": "03-01-21",
+		"Usage": 400,
+		"Cost": 38
+	},
+	{
+		"Account No": "100",
+		"Month": "04-01-21",
+		"Usage": 412,
+		"Cost": 39.14
+	},
+	{
+		"Account No": "100",
+		"Month": "05-01-21",
+		"Usage": 450,
+		"Cost": 42.75
+	},
+	{
+		"Account No": "100",
+		"Month": "06-01-21",
+		"Usage": 500,
+		"Cost": 47.5
+	},
+	{
+		"Account No": "100",
+		"Month": "07-01-21",
+		"Usage": 1000,
+		"Cost": 95
+	}
+
+]

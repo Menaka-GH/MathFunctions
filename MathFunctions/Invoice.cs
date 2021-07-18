@@ -15,7 +15,7 @@ namespace MathFunctions
     public class Invoice
     {
         public string AccountNo { get; set; }
-        public string Month { get; set; }
+        public DateTime Month { get; set; }
         public int Usage { get; set; }
         public double Cost { get; set; }
     }

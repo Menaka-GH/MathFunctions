@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -15,8 +16,10 @@ namespace MathFunctions
             string currentDirectory = Directory.GetCurrentDirectory();
             DirectoryInfo directory = new DirectoryInfo(currentDirectory);
             var fileName = Path.Combine(directory.FullName, "invoice_data.json");
+            double ceiling, floor;
             //var fileContents = ReadInvoiceResults(fileName);
             var invoices = DeserializeInvoices(fileName);
+           // StandardDeviationInvoice(invoices);
             Console.WriteLine("Electricity Usage");
             Console.WriteLine("*****************");
             foreach (var invoice in invoices)
@@ -30,10 +33,7 @@ namespace MathFunctions
 
 
                 //Standard Deviationn calculation
-                List<double> studentMarks = new List<double>() { 80, 88, 65, 69, 74, 92, 46, 99, 49 };
-            IEnumerable<int> primeNumbers ;
-            double standarddeviation = StandardDeviation(studentMarks);
-          //  Console.WriteLine("The Standard deviation: " + standarddeviation);
+               
             char userinput = 'y';
             while (userinput == 'y')
             {
@@ -58,13 +58,18 @@ namespace MathFunctions
                     {
 
                         case 1:
-                            Console.WriteLine("Standard Deviation of a Students Marks:");
-                            Console.WriteLine(StandardDeviationInvoice(invoices));
+                            Console.WriteLine("Standard Deviation of a Utility bill:");
+                            Console.WriteLine("*************************************");
+                            DateTime startDate = invoiceUsagestartDate(invoices);
+                            Console.WriteLine("userdate minus 12 days: "+startDate);
+                            var sd = StandardDeviationInvoice(startDate, invoices);
+                            Console.WriteLine("Standard Deviation: "+sd);
+                            variance(sd);
                             break;
 
                         case 2:
                             
-                            primeNumbers = PrimeNumbers();
+                            var primeNumbers = PrimeNumbers();
                             Console.WriteLine("Prime Numbers are: ");
                             foreach (var pn in primeNumbers)
                             {
@@ -79,20 +84,26 @@ namespace MathFunctions
 
                             break;
                         case 4:
-                            Console.WriteLine("Fibonacci Series");
+                            Console.WriteLine("Fibonacci Series: ");
+                            Fibonacci();
                             break;
                         case 5:
                             Console.WriteLine("Factorial of a Number");
+                            
+                            Factorial();
                             break;
                         case 6:
 
                             userinput = 'n';
+                            Console.ReadKey();
+                            
                             break;
 
 
                         default:
                             Console.WriteLine("No match found");
                             break;
+
                     }
 
                     try
@@ -121,7 +132,7 @@ namespace MathFunctions
                     catch
                     {
                         Console.WriteLine("Please enter y or n.");
-                        //userContinue = true;
+                        
                     }
                 
                 }
@@ -135,6 +146,19 @@ namespace MathFunctions
 
             }
         }
+        }
+
+        public static void Factorial()
+        {
+            Console.Write("Please enter a number to find a Factorial: ");
+            int number = int.Parse(Console.ReadLine());
+            int factorial = number;
+            for(int i=factorial - 1; i>=1;i--)
+            {
+                factorial = factorial * i;
+            }
+            Console.WriteLine(factorial);
+
         }
 
         static void OddEven()
@@ -153,6 +177,11 @@ namespace MathFunctions
               
         }
 
+        static void variance( double sd)
+        {
+            //data varianc = diference in deviation and usage / standard deviation* 100;
+            //var variant = 
+        }
         static List<int> PrimeNumbers()
         {
              List<int> primeNumbers = new List<int>();
@@ -187,42 +216,103 @@ namespace MathFunctions
            return primeNumbers;
         }
 
-        static double StandardDeviation(List<double> sMarks)
+        
+        public static DateTime invoiceUsagestartDate(List<Invoice> invoices)
         {
-            double mean,sum, sd;
-            mean = sMarks.Average();
-            sum = sMarks.Sum(d => Math.Pow(d-mean,2));
-            sd = Math.Sqrt((sum) / (sMarks.Count() - 1));
+            //asking user which month to compare with standard deviation
+            Console.WriteLine("Enter the Date of the Utility bill to compare the SD: ");
+            Console.WriteLine("Please enter the date in mm/dd/yy format: ");
+           // Console.WriteLine("Please enter the date: ");
+            
+            var userDate = DateTime.Parse(Console.ReadLine());
+            //DateTime dt = new DateTime(2017, 7, 20);
+            DateTime dt = userDate.AddMonths(-12);
+            //Console.WriteLine(dt.ToString());
+
+            Console.WriteLine("user date is: " + dt.ToString());
+            return dt;
+            
+        }
+        public static double StandardDeviationInvoice(DateTime stDate, List<Invoice> invoices)
+        {
+
+            //linq query 
+            DateTime endDate = stDate.AddMonths(12);
+            var eD = endDate.ToString();
+            var invoiceData = (from inv in invoices where inv.Month>= stDate && inv.Month < endDate
+                               select inv  );
+            
+            Console.WriteLine("Linq query data:  ");
+            foreach (var invoice in invoiceData)
+            {
+                Console.WriteLine(invoice.Usage);
+
+            }
+                double mean, sum = 0;
+            double sd = 0;
+            var totalInvoice = 0;
+            foreach (var invoice in invoiceData)
+            {
+                // calculate sum of invoice usage
+
+                    totalInvoice = totalInvoice + invoice.Usage;
+                  
+               
+
+            }
+
+            //Average calculation
+            Console.WriteLine("Totalinvoice sum: " + totalInvoice);
+            mean = totalInvoice / invoiceData.Count();
+            Console.WriteLine("Mean : "+mean);
+            foreach (var invoice in invoiceData)
+            {
+                //Console.WriteLine("invoice usage " + invoice.Usage);
+
+                sum = sum + Math.Pow((invoice.Usage - mean),2);
+
+            }
+            Console.WriteLine("Sum Ex: " + sum);
+
+            sd = Math.Sqrt((sum) / (invoiceData.Count() - 1));
+            Console.WriteLine("Standard deviation: " + sd);
+            double ceiling, floor;
+            ceiling = mean + 1.96 * sd;
+            floor = mean - 1.96 * sd;
+            Console.WriteLine("Ceiling: " + ceiling);
+            Console.WriteLine("Floor value:  " + floor);
+
+
+
+
+
+            //data varianc = diference in deviation and usage / standard deviation* 100;
+            //Ceiling = avg(x) + 1.96 * StDev(x)//
+            //b.Floor = avg(x) – 1.96 * StDev(x)
+
             return sd;
             
         }
-        public static double StandardDeviationInvoice(List<Invoice> invoices)
+        public static void Fibonacci()
         {
-            double mean, sum=0, sd;
-           var totalInvoice = 0;
-            foreach (var invoice in invoices)
+            int n1 = 0, n2 =1;
+            Console.Write("Please enter how many numbers do you want in the series? ");
+           
+            int numberSeries = int.Parse(Console.ReadLine());
+            Console.Write(n1 + " " + n2 + " ");
+            for (int i=0; i<=numberSeries;i++)
             {
-                // Console.WriteLine(invoice.Usage);
-                totalInvoice = totalInvoice + invoice.Usage;
+                int resultSeries = n1 + n2;
+                n1 = n2;
+                n2 = resultSeries;
+                Console.Write(resultSeries +" ");
             }
-
-            // mean = sMarks.Average();
-            // sum = sMarks.Sum(d => Math.Pow(d - mean, 2));
-            //sd = Math.Sqrt((sum) / (sMarks.Count() - 1));
-            //mean = invoices.Average();
-
-            mean = totalInvoice / invoices.Count();
-            foreach (var invoice in invoices)
-            {
-              
-                sum = sum + (invoice.Usage - mean);  
-                
-            }
-            sd = Math.Sqrt((sum) / (invoices.Count() - 1));
-
-            return sd;
+            Console.WriteLine();
 
         }
+        
+
+
         public static List<Invoice> DeserializeInvoices(string fileName)
         {
 

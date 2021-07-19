@@ -19,5 +19,5 @@ namespace MathFunctions
         public int Usage { get; set; }
         public double Cost { get; set; }
     }
-
+    
 }

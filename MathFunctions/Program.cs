@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace MathFunctions
 {
-    public static
+    
     class Program
     {
         static void Main(string[] args)
@@ -19,13 +19,7 @@ namespace MathFunctions
             //Creating object for the class "Number"
             Number num = new Number();
             var invoices =num.DeserializeInvoices(fileName);
-           // StandardDeviationInvoice(invoices);
-            Console.WriteLine("Electricity Usage");
-            Console.WriteLine("*****************");
-            foreach (var invoice in invoices)
-            {
-                Console.WriteLine(invoice.Cost);
-            }
+           // StandardDeviationInvoice(invoices);           
             
            //Master Loop
                
@@ -34,8 +28,9 @@ namespace MathFunctions
             {
                 try
                 {
-
-                    Console.WriteLine(" Please enter any number between 1 and 5 ");
+                    Console.WriteLine("                                        MATHEMATICAL FUNCTIONS");
+                    Console.WriteLine("                                       ************************");
+                    Console.WriteLine("Please enter any number between 1 and 5 ");
                     Console.WriteLine("******************************************");
 
 
@@ -59,7 +54,7 @@ namespace MathFunctions
                             Console.WriteLine("userdate minus 12 days: "+startDate);
                             var sd = num.StandardDeviationInvoice(startDate, invoices);
                             Console.WriteLine("Standard Deviation: "+sd);
-                            //variance(sd);
+                            validData(mean,sd);
                             break;
 
                         case 2:

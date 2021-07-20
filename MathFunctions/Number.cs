@@ -114,39 +114,24 @@ namespace MathFunctions
 
             }
             double mean, sum = 0;
-            double sd = 0;
-            var totalInvoice = 0;
-            foreach (var invoice in invoiceData)
-            {
-                // calculate sum of invoice usage
+            double sd = 0,total;
+            total = TotalInvoice(invoiceData);
 
-                totalInvoice = totalInvoice + invoice.Usage;
-
-
-
-            }
-
-            //Average calculation
-            Console.WriteLine("Totalinvoice sum: " + totalInvoice);
-            mean = totalInvoice / invoiceData.Count();
-            Console.WriteLine("Mean : " + mean);
+            //Average(Mean) calculation
+            
+            
             foreach (var invoice in invoiceData)
             {
                 //Console.WriteLine("invoice usage " + invoice.Usage);
 
-                sum = sum + Math.Pow((invoice.Usage - mean), 2);
+                sum = sum + Math.Pow((invoice.Usage - dataMean(total, invoiceData)), 2);
 
             }
             Console.WriteLine("Sum Ex: " + sum);
 
             sd = Math.Sqrt((sum) / (invoiceData.Count() - 1));
             Console.WriteLine("Standard deviation: " + sd);
-            double ceiling, floor;
-            ceiling = mean + 1.96 * sd;
-            floor = mean - 1.96 * sd;
-            Console.WriteLine("Ceiling: " + ceiling);
-            Console.WriteLine("Floor value:  " + floor);
-
+            
 
 
 
@@ -158,7 +143,36 @@ namespace MathFunctions
             return sd;
 
         }
-        public void Fibonacci()
+        double dataMean(double total, IEnumerable<Invoice> invoiceData)
+        {
+            double mean = total / invoiceData.Count();
+            Console.WriteLine("Mean : " + mean);
+            return mean;
+        }
+        
+        void validData(double mean,double sd)
+        {
+            double ceiling, floor;
+            ceiling = mean + 1.96 * sd;
+            floor = mean - 1.96 * sd;
+            Console.WriteLine("Ceiling: " + ceiling);
+            Console.WriteLine("Floor value:  " + floor);
+
+        }
+        double TotalInvoice(IEnumerable<Invoice> invoiceData)
+        {
+            var totalInvoice = 0;
+            foreach (var invoice in invoiceData)
+            {
+                // calculate sum of invoice usage
+
+                totalInvoice = totalInvoice + invoice.Usage;
+
+            }
+            Console.WriteLine("Totalinvoice sum: " + totalInvoice);
+            return totalInvoice;
+        }
+    public void Fibonacci()
         {
             int n1 = 0, n2 = 1;
             Console.Write("Please enter how many numbers do you want in the series? ");

@@ -113,7 +113,7 @@ namespace MathFunctions
                 Console.WriteLine(invoice.Usage);
 
             }
-            double mean, sum = 0;
+            double  sum = 0;
             double sd = 0,total;
             total = TotalInvoice(invoiceData);
 

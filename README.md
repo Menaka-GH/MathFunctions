@@ -10,7 +10,7 @@ Next function is Prime Number (The number divided by one and itself ) calculatio
 The third function is OddEven.  It will get the number as a input from the user and find whether it is odd(not divided by 2) or even(divided by 2).
 Then Factorial function will get the user's input to calculate the factorial of that number(5! = 1*2*3*4*5 = 120 ).
 
-#Project Requirements included in MathFunctions
+#Features included in MathFunctions
 ***********************************************
 1. Implemented a “master loop” console application where the user can repeatedly enter commands/perform actions, including choosing to exit the program.
 2. Created a dictionary or list, populate it with several values, retrieve at least one value, and use it in your program.

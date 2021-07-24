@@ -108,11 +108,11 @@ namespace MathFunctions
                                select inv);
 
             Console.WriteLine("Linq query data:  ");
-            foreach (var invoice in invoiceData)
-            {
-                Console.WriteLine(invoice.Usage);
+           // foreach (var invoice in invoiceData)
+            //{
+             //   Console.WriteLine(invoice.Usage);
 
-            }
+//            }
             double  sum = 0;
             double sd = 0,total;
             total = TotalInvoice(invoiceData);
@@ -146,7 +146,7 @@ namespace MathFunctions
         double dataMean(double total, IEnumerable<Invoice> invoiceData)
         {
             double mean = total / invoiceData.Count();
-            Console.WriteLine("Mean : " + mean);
+            //Console.WriteLine("Mean : " + mean);
             return mean;
         }
         

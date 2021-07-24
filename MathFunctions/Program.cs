@@ -52,10 +52,10 @@ namespace MathFunctions
                             Console.WriteLine("*************************************");
                             DateTime startDate =num.invoiceUsagestartDate(invoices);
                             Console.WriteLine("userdate minus 12 days: "+startDate);
-                            var mean = mean();
+                            //var mean = mean();
                             var sd = num.StandardDeviationInvoice(startDate, invoices);
                             Console.WriteLine("Standard Deviation: "+sd);
-                            num.dataMean(mean,sd);
+                           // num.dataMean(mean,sd);
                             //dataMean(total, invoiceData)
                             break;
 
@@ -87,7 +87,7 @@ namespace MathFunctions
                         case 6:
 
                             userinput = 'n';
-                            Console.ReadKey();
+                           // Console.ReadKey();
                             
                             break;
 

@@ -14,86 +14,141 @@ namespace MathFunctions
         public int number;
         public void Factorial()
         {
-            Console.Write("Please enter a number to find a Factorial: ");
-            number = int.Parse(Console.ReadLine());
-            int factorial = number;
-            for (int i = factorial - 1; i >= 1; i--)
+            bool x = true;
+            while (x)
             {
-                factorial = factorial * i;
+
+                try
+                {
+                    Console.Write("Please enter a number to find a Factorial: ");
+
+                    number = int.Parse(Console.ReadLine());
+                    int factorial = number;
+                    for (int i = factorial - 1; i >= 1; i--)
+                    {
+                        factorial = factorial * i;
+                    }
+                    Console.WriteLine(factorial);
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("Please enter only the numbers..");
+                    continue;
+                }
+                x = false;
             }
-            Console.WriteLine(factorial);
 
         }
 
         public void OddEven()
         {
-            Console.Write("Please enter a number to find Odd or Even number: ");
-            number = int.Parse(Console.ReadLine());
-            if (number % 2 == 0)
+             bool x = true;
+            while (x)
             {
-                Console.WriteLine($"The number {number} is even.");
+                try
+                {
+                    Console.Write("Please enter a number to find Odd or Even number: ");
 
+                    number = int.Parse(Console.ReadLine());
+                if (number % 2 == 0)
+                {
+                    Console.WriteLine($"The number {number} is even.");
+
+                }
+                else
+                {
+                    Console.WriteLine($"The number {number} is odd.");
+                }
             }
-            else
+            catch (FormatException)
             {
-                Console.WriteLine($"The number {number} is odd.");
+                Console.WriteLine("Please enter only the numbers..");
+                continue;
             }
-
+            x = false;
         }
+      }
 
         static void variance(double sd)
         {
             //data varianc = diference in deviation and usage / standard deviation* 100;
             //var variant = 
         }
-        public List<int> PrimeNumbers()
+        public void PrimeNumbers()
         {
             List<int> primeNumbers = new List<int>();
             //bool IsPrime = true;
-            Console.WriteLine("Please enter a first number to find the prime numbers");
-
-            int firstNumber = int.Parse(Console.ReadLine());
-            Console.WriteLine("Please enter a last number to find the prime numbers");
-            int lastNumber = int.Parse(Console.ReadLine());
-            for (int i = firstNumber; i <= lastNumber; i++)
+            
+            bool x = true;
+            while (x) { 
+            try
             {
-                int counter = 0;
-                for (int j = 2; j <= i / 2; j++)
+                    Console.WriteLine("Please enter a first number : ");
+                    int firstNumber = int.Parse(Console.ReadLine());
+                Console.WriteLine("Please enter a last number greater than first number: ");
+                int lastNumber = int.Parse(Console.ReadLine());
+                for (int i = firstNumber; i <= lastNumber; i++)
                 {
-                    if (i % j == 0)
+                    int counter = 0;
+                    for (int j = 2; j <= i / 2; j++)
                     {
-                        counter++;
-                        break;
+                        if (i % j == 0)
+                        {
+                            counter++;
+                            break;
+                        }
+                        //else 
                     }
-                    //else 
-                }
-                if (counter == 0 && i != 1)
-                {
+                    if (counter == 0 && i != 1)
                     {
-                        // Console.Write(i);
-                        primeNumbers.Add(i);
-                    }
+                        {
+                            // Console.Write(i);
+                            primeNumbers.Add(i);
+                        }
 
+                    }
                 }
+
+                Console.WriteLine("Prime numbers between " + firstNumber + " and " + lastNumber + " are: ");
+                //Console.WriteLine("Prime Numbers are: ");
+                foreach (var pn in primeNumbers)
+                {
+                    Console.Write(pn + " ");
+                }
+                Console.WriteLine();
             }
+            catch
+            {
+                Console.WriteLine("Please enter only the numbers..");
+                continue;
 
-            return primeNumbers;
+            }
+            x = false;
+        }
+            
+            //return primeNumbers;
+
         }
 
 
         public DateTime invoiceUsagestartDate(List<Invoice> invoices)
         {
             //asking user which month to compare with standard deviation
-            Console.WriteLine("Enter the Date of the Utility bill to compare the SD: ");
-            Console.WriteLine("Please enter the date in mm/dd/yy format: ");
-            // Console.WriteLine("Please enter the date: ");
+            DateTime dt;
+           
 
-            var userDate = DateTime.Parse(Console.ReadLine());
-            //DateTime dt = new DateTime(2017, 7, 20);
-            DateTime dt = userDate.AddMonths(-12);
-            //Console.WriteLine(dt.ToString());
+                Console.WriteLine("Enter the Date of the Utility bill to compare the SD: ");
+                Console.WriteLine("Please enter the date in mm/1/yy format and Please enter between 8/1/19 and 7/1/21 ");
+                // Console.WriteLine("Please enter the date: ");
 
-            Console.WriteLine("user date is: " + dt.ToString());
+                var userDate = DateTime.Parse(Console.ReadLine());
+                //dt = new DateTime(2017, 7, 20);
+                 dt = userDate.AddMonths(-12);
+                //Console.WriteLine(dt.ToString());
+
+                //Console.WriteLine("user date is: " + dt.ToString());
+                
+            
             return dt;
 
         }
@@ -107,7 +162,7 @@ namespace MathFunctions
                                where inv.Month >= stDate && inv.Month < endDate
                                select inv);
 
-            Console.WriteLine("Linq query data:  ");
+           // Console.WriteLine("Linq query data:  ");
            // foreach (var invoice in invoiceData)
             //{
              //   Console.WriteLine(invoice.Usage);
@@ -172,23 +227,35 @@ namespace MathFunctions
             Console.WriteLine("Totalinvoice sum: " + totalInvoice);
             return totalInvoice;
         }
-    public void Fibonacci()
+        public void Fibonacci()
         {
             int n1 = 0, n2 = 1;
-            Console.Write("Please enter how many numbers do you want in the series? ");
-
-            int numberSeries = int.Parse(Console.ReadLine());
-            Console.Write(n1 + " " + n2 + " ");
-            for (int i = 0; i <= numberSeries; i++)
+             bool x = true;
+            while (x)
             {
-                int resultSeries = n1 + n2;
-                n1 = n2;
-                n2 = resultSeries;
-                Console.Write(resultSeries + " ");
-            }
-            Console.WriteLine();
+                try
+                {
+                    Console.Write("Please enter how many numbers do you want in the series? ");
 
-        }
+                    int numberSeries = int.Parse(Console.ReadLine());
+                    Console.Write(n1 + " " + n2 + " ");
+                    for (int i = 0; i <= numberSeries; i++)
+                    {
+                        int resultSeries = n1 + n2;
+                        n1 = n2;
+                        n2 = resultSeries;
+                        Console.Write(resultSeries + " ");
+                    }
+                    Console.WriteLine();
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("Please enter only the numbers..");
+                    continue;
+                }
+                x = false;
+            }
+}
 
 
 

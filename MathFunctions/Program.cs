@@ -51,29 +51,23 @@ namespace MathFunctions
                             Console.WriteLine("Standard Deviation of a Utility bill:");
                             Console.WriteLine("*************************************");
                             DateTime startDate =num.invoiceUsagestartDate(invoices);
-                            Console.WriteLine("userdate minus 12 days: "+startDate);
+                            Console.WriteLine("userdate minus 12 Months: "+startDate);
                             //var mean = mean();
                             var sd = num.StandardDeviationInvoice(startDate, invoices);
-                            Console.WriteLine("Standard Deviation: "+sd);
+                            //Console.WriteLine("Standard Deviation: "+sd);
                            // num.dataMean(mean,sd);
                             //dataMean(total, invoiceData)
                             break;
 
                         case 2:
-                            
-                            var primeNumbers = num.PrimeNumbers();
-                            Console.WriteLine("Prime Numbers are: ");
-                            foreach (var pn in primeNumbers)
-                            {
-                                Console.Write(pn + " ");
-                            }
-                            Console.WriteLine();
+
+                            // var primeNumbers = num.PrimeNumbers();
+                            num.PrimeNumbers();
                             break;
 
                         case 3:
                             Console.WriteLine("Odd or Even Number");
                             num.OddEven();
-
                             break;
                         case 4:
                             Console.WriteLine("Fibonacci Series: ");
@@ -121,9 +115,9 @@ namespace MathFunctions
 
                         }
                     }
-                    catch
+                    catch(FormatException e)
                     {
-                        Console.WriteLine("Please enter y or n.");
+                        Console.WriteLine("Please enter y or n."+e);
                         
                     }
                 
@@ -134,7 +128,7 @@ namespace MathFunctions
 
             catch
             {
-                Console.WriteLine("Please enter any number between 1 and 5");
+                Console.WriteLine("Please enter any number between 1 and 6");
 
             }
         }

@@ -80,49 +80,88 @@ namespace MathFunctions
             //bool IsPrime = true;
             
             bool x = true;
-            while (x) { 
-            try
-            {
-                    Console.WriteLine("Please enter a first number : ");
-                    int firstNumber = int.Parse(Console.ReadLine());
-                Console.WriteLine("Please enter a last number greater than first number: ");
-                int lastNumber = int.Parse(Console.ReadLine());
-                for (int i = firstNumber; i <= lastNumber; i++)
+            while (x) {
+                try
                 {
-                    int counter = 0;
-                    for (int j = 2; j <= i / 2; j++)
-                    {
-                        if (i % j == 0)
+                   // bool y = true;
+                    //while (y)
+                    //{
+                        Console.WriteLine("Please enter a first number : ");
+                        int firstNumber = int.Parse(Console.ReadLine());
+                        Console.WriteLine("Please enter a last number: ");
+                        int lastNumber = int.Parse(Console.ReadLine());
+                        if (lastNumber < firstNumber)
                         {
-                            counter++;
-                            break;
-                        }
-                        //else 
-                    }
-                    if (counter == 0 && i != 1)
-                    {
-                        {
-                            // Console.Write(i);
-                            primeNumbers.Add(i);
+                            for(int i = lastNumber; i <= firstNumber; i++)
+                            {
+                                int counter = 0;
+                                for (int j = 2; j <= i / 2; j++)
+                                {
+                                    if (i % j == 0)
+                                    {
+                                        counter++;
+                                        break;
+                                    }
+                                    //else 
+                                }
+                                if (counter == 0 && i != 1)
+                                {
+                                    {
+                                        // Console.Write(i);
+                                        primeNumbers.Add(i);
+                                    }
+
+                                }
+                            }
                         }
 
-                    }
-                }
+                        //Console.WriteLine("Please Enter lastNumber greater than firstNumber.. ");
+                            //continue;
+                        //}
+                        else
+                        {
+                            for (int i = firstNumber; i <= lastNumber; i++)
+                            {
+                                int counter = 0;
+                                for (int j = 2; j <= i / 2; j++)
+                                {
+                                    if (i % j == 0)
+                                    {
+                                        counter++;
+                                        break;
+                                    }
+                                    //else 
+                                }
+                                if (counter == 0 && i != 1)
+                                {
+                                    {
+                                        // Console.Write(i);
+                                        primeNumbers.Add(i);
+                                    }
 
-                Console.WriteLine("Prime numbers between " + firstNumber + " and " + lastNumber + " are: ");
-                //Console.WriteLine("Prime Numbers are: ");
-                foreach (var pn in primeNumbers)
+                                }
+                            }
+                        }
+
+
+                        Console.WriteLine("Prime numbers between " + firstNumber + " and " + lastNumber + " are: ");
+                        //Console.WriteLine("Prime Numbers are: ");
+                        foreach (var pn in primeNumbers)
+                        {
+                            Console.Write(pn + " ");
+                        }
+                        Console.WriteLine();
+                        //y = false;
+                    }
+
+               // }
+
+                catch
                 {
-                    Console.Write(pn + " ");
-                }
-                Console.WriteLine();
-            }
-            catch
-            {
-                Console.WriteLine("Please enter only the numbers..");
-                continue;
+                    Console.WriteLine("Please enter only the numbers..");
+                    continue;
 
-            }
+                }
             x = false;
         }
             
@@ -242,9 +281,11 @@ namespace MathFunctions
                     for (int i = 0; i <= numberSeries; i++)
                     {
                         int resultSeries = n1 + n2;
-                        n1 = n2;
-                        n2 = resultSeries;
-                        Console.Write(resultSeries + " ");
+                       
+                            n1 = n2;
+                            n2 = resultSeries;
+                            Console.Write(resultSeries + " ");
+                       
                     }
                     Console.WriteLine();
                 }

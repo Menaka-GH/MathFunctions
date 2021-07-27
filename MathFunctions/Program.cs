@@ -115,9 +115,9 @@ namespace MathFunctions
 
                         }
                     }
-                    catch(FormatException e)
+                    catch(FormatException)
                     {
-                        Console.WriteLine("Please enter y or n."+e);
+                        Console.WriteLine("Please enter y or n.");
                         
                     }
                 

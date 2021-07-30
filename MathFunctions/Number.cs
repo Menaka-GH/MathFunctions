@@ -31,7 +31,7 @@ namespace MathFunctions
                     {
                         factorial = factorial * i;
                     }
-                    Console.WriteLine(factorial);
+                    Console.WriteLine("Factorial of "+number+" is: "+factorial);
                 }
                 catch (FormatException)
                 {
@@ -72,11 +72,7 @@ namespace MathFunctions
         }
       }
 
-        static void variance(double sd)
-        {
-            //data varianc = diference in deviation and usage / standard deviation* 100;
-            //var variant = 
-        }
+        
         public void PrimeNumbers()
         {
             List<int> primeNumbers = new List<int>();
@@ -93,7 +89,7 @@ namespace MathFunctions
                         int firstNumber = int.Parse(Console.ReadLine());
                         Console.WriteLine("Please enter a last number: ");
                         int lastNumber = int.Parse(Console.ReadLine());
-                        if (lastNumber < firstNumber)
+                        if (firstNumber > lastNumber )
                         {
                             for(int i = lastNumber; i <= firstNumber; i++)
                             {
@@ -107,7 +103,7 @@ namespace MathFunctions
                                     }
                                     //else 
                                 }
-                                if (counter == 0 && i != 1)
+                                if (counter == 0 && i != 1 && i!=0)
                                 {
                                     {
                                         // Console.Write(i);
@@ -118,9 +114,7 @@ namespace MathFunctions
                             }
                         }
 
-                        //Console.WriteLine("Please Enter lastNumber greater than firstNumber.. ");
-                            //continue;
-                        //}
+                        
                         else
                         {
                             for (int i = firstNumber; i <= lastNumber; i++)
@@ -133,9 +127,9 @@ namespace MathFunctions
                                         counter++;
                                         break;
                                     }
-                                    //else 
+                                  
                                 }
-                                if (counter == 0 && i != 1)
+                                if (counter == 0 && i != 1 && i != 0)
                                 {
                                     {
                                         // Console.Write(i);
@@ -330,7 +324,8 @@ namespace MathFunctions
                     Console.Write("Please enter how many numbers do you want in the series? ");
 
                     int numberSeries = int.Parse(Console.ReadLine());
-                    Console.Write(n1 + " " + n2 + " ");
+                    
+                    Console.Write("Fibonacci series: "+n1 + " " + n2 + " ");
                     for (int i = 0; i <= numberSeries; i++)
                     {
                         int resultSeries = n1 + n2;

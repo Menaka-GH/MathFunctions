@@ -28,9 +28,10 @@ namespace MathFunctions
             {
                 try
                 {
+                    Console.WriteLine("                                       ************************");
                     Console.WriteLine("                                        MATHEMATICAL FUNCTIONS");
                     Console.WriteLine("                                       ************************");
-                    Console.WriteLine("Please enter any number between 1 and 6 ");
+                    Console.WriteLine("Please choose any number between 1 and 6 ");
                     Console.WriteLine("******************************************");
 
 
@@ -62,27 +63,31 @@ namespace MathFunctions
 
                         case 2:
 
-                           
+                            Console.WriteLine("Prime Numbers");
+                            Console.WriteLine("*************");
                             num.PrimeNumbers();
                             break;
 
                         case 3:
                             Console.WriteLine("Odd or Even Number");
+                            Console.WriteLine("******************");
                             num.OddEven();
                             break;
                         case 4:
                             Console.WriteLine("Fibonacci Series: ");
+                            Console.WriteLine("*****************");
                             num.Fibonacci();
                             break;
                         case 5:
                             Console.WriteLine("Factorial of a Number");
-                            
+                            Console.WriteLine("*********************");
+
                             num.Factorial();
                             break;
                         case 6:
 
                             userinput = 'n';
-                           // Console.ReadKey();
+                            Console.WriteLine("Thank you!!");
                             
                             break;
 
@@ -111,6 +116,7 @@ namespace MathFunctions
 
                             else
                             {
+                                Console.WriteLine("Thank you!!");
                                 break;
                             }
 

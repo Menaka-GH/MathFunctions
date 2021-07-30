@@ -30,7 +30,7 @@ namespace MathFunctions
                 {
                     Console.WriteLine("                                        MATHEMATICAL FUNCTIONS");
                     Console.WriteLine("                                       ************************");
-                    Console.WriteLine("Please enter any number between 1 and 5 ");
+                    Console.WriteLine("Please enter any number between 1 and 6 ");
                     Console.WriteLine("******************************************");
 
 
@@ -52,16 +52,17 @@ namespace MathFunctions
                             Console.WriteLine("*************************************");
                             DateTime startDate =num.invoiceUsagestartDate(invoices);
                             Console.WriteLine("userdate minus 12 Months: "+startDate);
-                            //var mean = mean();
+                           
                             var sd = num.StandardDeviationInvoice(startDate, invoices);
-                            //Console.WriteLine("Standard Deviation: "+sd);
-                           // num.dataMean(mean,sd);
-                            //dataMean(total, invoiceData)
+                            
+                            var ceiling = num.Ceilingvalue(num.mean,sd);
+                            var floor = num.Floorvalue(num.mean,sd);
+                            num.validData(ceiling,floor, invoices);
                             break;
 
                         case 2:
 
-                            // var primeNumbers = num.PrimeNumbers();
+                           
                             num.PrimeNumbers();
                             break;
 

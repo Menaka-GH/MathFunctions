@@ -12,6 +12,9 @@ namespace MathFunctions
     public class Number
     {
         public int number;
+        public DateTime userDate;
+        public IEnumerable<Invoice> userData;
+        public double mean;
         public void Factorial()
         {
             bool x = true;
@@ -176,13 +179,17 @@ namespace MathFunctions
             DateTime dt;
            
 
-                Console.WriteLine("Enter the Date of the Utility bill to compare the SD: ");
-                Console.WriteLine("Please enter the date in mm/1/yy format and Please enter between 8/1/19 and 7/1/21 ");
-                // Console.WriteLine("Please enter the date: ");
+            Console.WriteLine("Enter the Date of the Utility bill to compare the SD: ");
+            Console.WriteLine("Please enter the date in mm/1/yy format and Please choose any of the following dates: ");
+            Console.WriteLine("1. 8/1/19,9/1/19, 10/1/19, 11/1/19, 12/1/19  ");
+            Console.WriteLine("2. 1/1/20, 2/1/20, 3/1/20, 4/1/20, 5/1/20, 6/1/20");
+            Console.WriteLine("3. 7/1/20, 8/1/20, 9/1/20, 10/1/20, 11/1/20, 12/1/20");
+            Console.WriteLine("2. 1/1/21, 2/1/21, 3/1/21, 4/1/21, 5/1/21, 6/1/21, 7/1/21");
+            userDate = DateTime.Parse(Console.ReadLine());
+                
 
-                var userDate = DateTime.Parse(Console.ReadLine());
-                //dt = new DateTime(2017, 7, 20);
-                 dt = userDate.AddMonths(-12);
+            //dt = new DateTime(2017, 7, 20);
+            dt = userDate.AddMonths(-12);
                 //Console.WriteLine(dt.ToString());
 
                 //Console.WriteLine("user date is: " + dt.ToString());
@@ -197,23 +204,24 @@ namespace MathFunctions
             //linq query 
             DateTime endDate = stDate.AddMonths(12);
             var eD = endDate.ToString();
+            var userData = (from inv in invoices where inv.Month == stDate select inv);
+            
             var invoiceData = (from inv in invoices
                                where inv.Month >= stDate && inv.Month < endDate
                                select inv);
-
-           // Console.WriteLine("Linq query data:  ");
-           // foreach (var invoice in invoiceData)
+           // Console.WriteLine("userData: " );
+            // Console.WriteLine("Linq query data:  ");
+            // foreach (var ud in userData)
             //{
-             //   Console.WriteLine(invoice.Usage);
-
+             // Console.WriteLine(ud.Usage);
 //            }
             double  sum = 0;
             double sd = 0,total;
             total = TotalInvoice(invoiceData);
 
             //Average(Mean) calculation
-            
-            
+
+            //Console.WriteLine(" ");
             foreach (var invoice in invoiceData)
             {
                 //Console.WriteLine("invoice usage " + invoice.Usage);
@@ -221,7 +229,7 @@ namespace MathFunctions
                 sum = sum + Math.Pow((invoice.Usage - dataMean(total, invoiceData)), 2);
 
             }
-            Console.WriteLine("Sum Ex: " + sum);
+            Console.WriteLine("Sum of Invoice data: " + sum);
 
             sd = Math.Sqrt((sum) / (invoiceData.Count() - 1));
             Console.WriteLine("Standard deviation: " + sd);
@@ -237,23 +245,68 @@ namespace MathFunctions
             return sd;
 
         }
-        double dataMean(double total, IEnumerable<Invoice> invoiceData)
+         public void validData(double ceiling, double floor,List<Invoice> invoices)
         {
-            double mean = total / invoiceData.Count();
+            userData = (from inv in invoices where inv.Month == userDate select inv);
+
+
+            //Console.WriteLine("userData: ");
+            // Console.WriteLine("Linq query data:  ");
+            foreach (var ud in userData)
+            {
+                Console.WriteLine("userData: "+ud.Usage);
+                if(ceiling >= ud.Usage && floor<= ud.Usage)
+                {
+                    Console.WriteLine("The data usage "+ ud.Usage
+                    + " for the userdate is valid data");
+                }
+                else
+                {
+                    Console.WriteLine("The data usage " + ud.Usage
+                    + " for the userdate is not valid data");
+                }
+            }
+            //	If the data is within the floor and the ceiling, it is considered valid and the test is passed
+            // Floor <= current data point <= Ceiling
+            //If the data is outside the floor or the ceiling, the test fails, and is reflected in the open tests
+            //Current data point<floor or Current data point > ceiling
+
+        }
+        public double dataMean(double total, IEnumerable<Invoice> invoiceData)
+        {
+            mean = total / invoiceData.Count();
             //Console.WriteLine("Mean : " + mean);
             return mean;
         }
         
-        void validData(double mean,double sd)
+        public double Ceilingvalue(double mean,double sd)
         {
-            double ceiling, floor;
+            double ceiling;
             ceiling = mean + 1.96 * sd;
-            floor = mean - 1.96 * sd;
+            
             Console.WriteLine("Ceiling: " + ceiling);
-            Console.WriteLine("Floor value:  " + floor);
+            //Console.WriteLine("Floor value:  " + floor);
+            
+            return ceiling;
+
 
         }
-        double TotalInvoice(IEnumerable<Invoice> invoiceData)
+        public double Floorvalue(double mean, double sd)
+        {
+            double  floor;
+            //ceiling = mean + 1.96 * sd;
+            floor = mean - 1.96 * sd;
+           // Console.WriteLine("Ceiling: " + ceiling);
+            Console.WriteLine("Floor value:  " + floor);
+            //	If the data is within the floor and the ceiling, it is considered valid and the test is passed
+            // Floor <= current data point <= Ceiling
+            //If the data is outside the floor or the ceiling, the test fails, and is reflected in the open tests
+            //Current data point<floor or Current data point > ceiling
+
+            return floor;
+
+        }
+        public double TotalInvoice(IEnumerable<Invoice> invoiceData)
         {
             var totalInvoice = 0;
             foreach (var invoice in invoiceData)
